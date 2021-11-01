@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="app.css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <title>Add Your Quote</title>
+        <link
+            rel="shortcut icon"
+            type="image/jpg"
+            href="android-chrome-192x192.png"
+        />
+    </head>
+    <body id="up-target">
+        <a href="/">
+            <img class="back" alt="" />
+        </a>
+
+        <h1 class="ff-heading1 fs-900 my-4 clr-p-d">
+            Add new quotes to your collection
+        </h1>
+        <form
+            style="margin-inline: auto"
+            class="card card-sec"
+            action="/"
+            method="post"
+        >
+            <input
+                class="ff-para ls-1"
+                placeholder="Username"
+                type="text"
+                name="userName"
+                id="userName"
+            />
+            <br />
+            <textarea
+                class="ff-para ls-1"
+                placeholder="Your quote here..."
+                style="resize: none"
+                name="userQuote"
+                id=""
+                cols="30"
+                rows="5"
+            ></textarea>
+            <br />
+            <button class="bg-b-e clr-black sec sec-1">ADD QUOTE</button>
+        </form>
+        <button
+            style="padding-inline: 3em; font-weight: bold"
+            class="p-1 bg-s-d clr-black main my-5"
+            id="addBtn"
+        >
+            GET NEW QUOTES
+        </button>
+
+        <button
+            class="p-1 bg-s-d clr-black main my-5 helper-btn"
+            id="helperBtn"
+        >
+            LOAD MORE
+        </button>
+        <a href="#up-target">
+            <div class="up-btn">
+                <img src="arrow_black.svg" alt="" />
+            </div>
+        </a>
+
+        <div class="wrapper wrapper-sec"></div>
+
+        <script src="new.js"></script>
+    </body>
+</html>

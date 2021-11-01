@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="app.css" />
+        <title>Beautiful Quotes</title>
+        <link
+            rel="shortcut icon"
+            type="image/jpg"
+            href="android-chrome-192x192.png"
+        />
+    </head>
+    <body id="up-target-main">
+        <input type="checkbox" class="checkbox" id="checkbox" />
+        <label class="check-container" for="checkbox">
+            <img class="sun" src="white-balance-sunny.svg" alt="" />
+            <img class="moon" src="weather-night.svg" alt="" />
+            <div class="circle"></div>
+        </label>
+        <h1 class="ff-heading1 fs-1000 clr-p-d my-4">
+            Make and manage your
+            <span data-text="QUOTES" class="clr-s-d">"QUOTES"</span>
+        </h1>
+        <a href="/new">
+            <button
+                style="padding-inline: 3em"
+                class="p-1 bg-p-l clr-white main"
+                type="submit"
+            >
+                ADD A NEW QUOTE
+            </button>
+        </a>
+
+        <div class="wrapper">
+            <%for (let quote of allQuotes) {%>
+            <div class="card my-5">
+                <h2 class="h-grad ff-heading2 fs-700 clr-black py-2">
+                    <%=quote.userName%>
+                </h2>
+                <p style="font-weight: bold" class="clr-s-d ff-para ls-1">
+                    <%=quote.userQuote%>
+                </p>
+                <div class="flex py-2">
+                    <a href="/<%=quote.userID%>/edit"
+                        ><button class="bg-b-e clr-black sec sec-1">
+                            EDIT
+                        </button></a
+                    >
+                    <form
+                        action="/<%=quote.userID%>/delete?_method=DELETE"
+                        method="post"
+                    >
+                        <button
+                            class="sec sec-2 bg-b-d clr-black"
+                            type="submit"
+                        >
+                            DELETE
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <% }%>
+        </div>
+        <a href="#up-target-main">
+            <div class="up-btn">
+                <img src="arrow_black.svg" alt="" />
+            </div>
+        </a>
+        <script src="home.js"></script>
+    </body>
+</html>

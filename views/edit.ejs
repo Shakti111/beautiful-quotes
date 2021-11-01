@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/app.css" />
+        <title>Edit Your Quote</title>
+        <link
+            rel="shortcut icon"
+            type="image/jpg"
+            href="/android-chrome-192x192.png"
+        />
+    </head>
+    <body>
+        <a href="/">
+            <img class="back" alt="" />
+        </a>
+        <h1 class="ff-heading1 fs-900 my-4 clr-p-d">Edit your quote</h1>
+        <form
+            class="card-tert"
+            action="/<%=found.userID%>/edit?_method=PATCH"
+            method="post"
+        >
+            <h2
+                style="width: auto; display: inline-block"
+                class="ff-heading2 fs-800 clr-black py-2 ls-1 h-grad"
+            >
+                <%=found.userName%>
+            </h2>
+            <textarea
+                class="ff-para ls-1"
+                style="resize: none; display: block; margin-inline: auto"
+                name="userQuote"
+                value="2"
+                id="userQuote"
+                cols="30"
+                rows="10"
+            >
+<%=found.userQuote%></textarea
+            >
+            <button
+                style="color: #000; font-weight: bold"
+                class="bg-s-d sec sec-3 my-2 clr-black ls-2"
+                type="submit"
+            >
+                CONFIRM
+            </button>
+        </form>
+        <script src="/edit.js"></script>
+    </body>
+</html>
