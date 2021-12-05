@@ -4,6 +4,18 @@ import methodOverride from "method-override";
 import { Quote } from "./models/quotes.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import mongoose from "mongoose";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/Quote";
+
+mongoose
+    .connect(dbUrl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        console.log("Mongoose connection established!");
+    })
+    .catch((err) => console.log(err));
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
