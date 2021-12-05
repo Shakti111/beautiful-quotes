@@ -1,66 +1,62 @@
-const express = require("express");
+import express from "express";
+import path from "path";
+import methodOverride from "method-override";
+import { Quote } from "./models/quotes.js";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 const app = express();
-const path = require("path");
-const methodOverride = require("method-override");
-const axios = require("axios");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const port = process.env.PORT || 3000;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "utilities")));
 
-let userID = 4;
-let allQuotes = [
-    {
-        userID: 1,
-        userName: "John Lennon",
-        userQuote: "Life is what happens when you’re busy making other plans.",
-    },
-    {
-        userID: 2,
-        userName: "Mae West",
-        userQuote:
-            "You only live once, but if you do it right, once is enough.",
-    },
-    {
-        userID: 3,
-        userName: "Thomas A. Edison",
-        userQuote:
-            "Many of life’s failures are people who did not realize how close they were to success when they gave up.",
-    },
-];
 app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
-app.get("/", (req, res) => {
+
+app.get("/", async (req, res) => {
+    const allQuotes = await Quote.find({});
     res.render("home", { allQuotes });
 });
+
 app.get("/new", (req, res) => {
     res.render("new");
 });
-app.post("/", (req, res) => {
+
+app.post("/", async (req, res) => {
     const { userName, userQuote } = req.body;
-    allQuotes.push({ userID, userName, userQuote });
-    userID += 1;
+    const newQuote = await new Quote({
+        userName,
+        userQuote,
+    });
+    newQuote.save();
     res.redirect("/");
 });
-app.get("/:userID/edit", (req, res) => {
-    const { userID } = req.params;
-    const found = allQuotes.find((c) => c.userID === parseInt(userID));
+
+app.get("/:id/edit", async (req, res) => {
+    const { id } = req.params;
+    const found = await Quote.findById(id);
     res.render("edit", { found });
 });
-app.patch("/:userID/edit", (req, res) => {
-    const { userID } = req.params;
+
+app.patch("/:id/edit", async (req, res) => {
+    const { id } = req.params;
     const editedQuote = req.body.userQuote;
-    const found = allQuotes.find((c) => c.userID === parseInt(userID));
-    found.userQuote = editedQuote;
+
+    const found = await Quote.findByIdAndUpdate(id, { userQuote: editedQuote });
     res.redirect("/");
 });
-app.delete("/:userID/delete", (req, res) => {
-    const { userID } = req.params;
-    const found = allQuotes.find((c) => c.userID === parseInt(userID));
-    allQuotes = allQuotes.filter((c) => c.userID !== found.userID);
+
+app.delete("/:id/delete", async (req, res) => {
+    const { id } = req.params;
+    const deletedQuote = await Quote.findByIdAndDelete(id);
     res.redirect("/");
 });
+
 app.listen(port, () => {
     console.log(`LISTENING ON PORT ${port}!`);
 });

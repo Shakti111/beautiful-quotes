@@ -43,13 +43,13 @@
                     <%=quote.userQuote%>
                 </p>
                 <div class="flex py-2">
-                    <a href="/<%=quote.userID%>/edit"
+                    <a href="/<%=quote._id%>/edit"
                         ><button class="bg-b-e clr-black sec sec-1">
                             EDIT
                         </button></a
                     >
                     <form
-                        action="/<%=quote.userID%>/delete?_method=DELETE"
+                        action="/<%=quote._id%>/delete?_method=DELETE"
                         method="post"
                     >
                         <button
