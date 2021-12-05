@@ -18,18 +18,3 @@ const quoteSchema = new Schema({
 });
 
 export const Quote = mongoose.model("Quote", quoteSchema);
-
-// const quote1 = new Quote({
-//     userName: "Shakti",
-//     userQuote: "hii my name is Shakti",
-// });
-// const quote2 = new Quote({
-//     userName: "Joy",
-//     userQuote: "hii my name is Joy",
-// });
-// quote2.save();
-// const quote3 = new Quote({
-//     userName: "Suchitra",
-//     userQuote: "hii my name is Suchitra",
-// });
-// quote3.save();
